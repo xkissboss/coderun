@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/ace/src-noconflict/ext-language_tools.js"></script>
+    <script src="/lib/jquery-1.10.2.min.js"></script>
+    <script src="/js/base64.min.js"></script>
+    <script src="/js/default_code.js"></script>
+    <script src="/js/common.js"></script>
+
+    <style type="text/css" media="screen">
+        #code_editor {
+            width: 100%;
+            height: 400px;
+            float: left;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <a href="/code/python">Python</a>&nbsp;&nbsp;&nbsp;&nbsp;|
+        <a href="/code/csharp">csharp</a>&nbsp;&nbsp;&nbsp;&nbsp;|
+        <a href="/code/c">C</a>&nbsp;&nbsp;&nbsp;&nbsp;|
+        <a href="/code/cpp">C++</a>&nbsp;&nbsp;&nbsp;&nbsp;|
+        <a href="/code/java">Java</a>&nbsp;&nbsp;&nbsp;&nbsp;|
+        <a href="/code/js">javascript</a>&nbsp;&nbsp;&nbsp;&nbsp;|
+        <a href="/code/nodejs">nodejs</a>&nbsp;&nbsp;&nbsp;&nbsp;|
+    </div>
+    <div>
+        <div>
+            <div id="code_editor"></div>
+            <span><button id="run_btn">运行</button></span>
+        </div>
+        <div>
+            <span>运行结果</span>
+            <div id="run_data">
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        ace.require("ace/ext/language_tools");
+        var editor = ace.edit("code_editor");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/@ViewBag.SetModel");
+        function runjs() {
+            eval(editor.getValue());
+        }
+        $(document).ready(function () {
+            var reqUrl = '@ViewBag.ReqUrl';
+            var from_code = getUrlParam('code');
+            if (from_code) {
+                try {
+                    from_code = Base64.decode(from_code);
+                } catch (err) {
+                    from_code = '';
+                }
+            }
+            if (from_code) {
+                editor.setValue(from_code);
+            } else {
+                editor.setValue(Base64.decode(codeArr['@ViewBag.Title']));
+            }
+
+            $('#run_btn').click(function () {
+
+                if (!reqUrl) {
+                    alert('请求接口无效');
+                    return;
+                }
+                var bengin = "scriptfunc:";
+                // 判断是否 scriptfunc开头的，是则执行改js方法
+                if (reqUrl.substr(0, bengin.length) == bengin) {
+                    var func = reqUrl.replace(bengin, '');
+                    try {
+                        eval(func);
+                    }
+                    catch (err) {
+                        alert("error:" + err.message)
+                    }
+                    return;
+                }
+                var code = editor.getValue();
+                if (code == "" || code == undefined || code == null) {
+                    alert('请填写代码');
+                    $('#code_editor').focus();
+                    return;
+                }
+                $.post(reqUrl, { 'code': Base64.encode(code) }, function (rsp) {
+                    if (rsp.code === 0) {
+                        $('#run_data').html('运行成功：' + rsp.message);
+                    } else {
+                        $('#run_data').html('运行失败：' + rsp.message);
+                    }
+
+                });
+            });
+        });
+
+
+    </script>
+</body>
+
+
+</html>
