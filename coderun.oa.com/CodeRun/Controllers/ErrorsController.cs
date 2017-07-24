@@ -24,7 +24,7 @@ namespace CodeRun.Controllers
                 return View("401");
             else if (statusCode == 502)
                 return View("502");
-            return View("common");
+            return View("Common");
         }
 
         [Route("errors/handler")]
@@ -32,7 +32,7 @@ namespace CodeRun.Controllers
         {
             var feature = HttpContext.Features.Get<IExceptionHandlerFeature>();
             var error = feature?.Error;
-            return View("common");
+            return View("Common");
         }
     }
 }

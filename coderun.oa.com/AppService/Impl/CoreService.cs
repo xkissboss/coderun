@@ -23,7 +23,7 @@ namespace AppService.Impl
 
         public CmResult Java(string code)
         {
-            Match match = Regex.Match(code, @"public class \s+(?<classname>\w+)\s+");
+            Match match = Regex.Match(code, @"public class\s+(?<classname>\w+)\s+");
             if (!match.Success)
                 return CmResult.BuildFail("", "找不到public class类");
             string className = match.Groups["classname"].Value;

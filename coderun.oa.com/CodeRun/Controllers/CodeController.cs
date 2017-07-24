@@ -16,7 +16,7 @@ namespace CodeRun.Controllers
             ViewBag.Title = "c";
             ViewBag.SetModel = "c_cpp";
             ViewBag.ReqUrl = "/api/code/run/c";
-            return View("index");
+            return View("Index");
         }
 
         public IActionResult C()
@@ -24,7 +24,7 @@ namespace CodeRun.Controllers
             ViewBag.Title = "c";
             ViewBag.SetModel = "c_cpp";
             ViewBag.ReqUrl = "/api/code/run/c";
-            return View("index");
+            return View("Index");
         }
 
         public IActionResult Cpp()
@@ -32,7 +32,7 @@ namespace CodeRun.Controllers
             ViewBag.SetModel = "c_cpp";
             ViewBag.Title = "cpp";
             ViewBag.ReqUrl = "/api/code/run/cpp";
-            return View("index");
+            return View("Index");
         }
 
         public IActionResult Java()
@@ -41,7 +41,7 @@ namespace CodeRun.Controllers
             ViewBag.Title = "java";
             ViewBag.SetModel = "java";
             ViewBag.ReqUrl = "/api/code/run/java";
-            return View("index");
+            return View("Index");
         }
 
         public IActionResult Python()
@@ -49,7 +49,7 @@ namespace CodeRun.Controllers
             ViewBag.Title = "python";
             ViewBag.SetModel = "python";
             ViewBag.ReqUrl = "/api/code/run/python";
-            return View("index");
+            return View("Index");
         }
 
         public IActionResult Js()
@@ -57,7 +57,7 @@ namespace CodeRun.Controllers
             ViewBag.Title = "javascript";
             ViewBag.SetModel = "javascript";
             ViewBag.ReqUrl = "scriptfunc:runjs()";
-            return View("index");
+            return View("Index");
         }
 
         public IActionResult Csharp()
@@ -65,7 +65,7 @@ namespace CodeRun.Controllers
             ViewBag.Title = "csharp";
             ViewBag.SetModel = "csharp";
             ViewBag.ReqUrl = "/api/code/run/csharp";
-            return View("index");
+            return View("Index");
         }
 
         public IActionResult Nodejs()
@@ -73,7 +73,7 @@ namespace CodeRun.Controllers
             ViewBag.Title = "nodejs";
             ViewBag.SetModel = "javascript";
             ViewBag.ReqUrl = "/api/code/run/nodejs";
-            return View("index");
+            return View("Index");
         }
     }
 }
