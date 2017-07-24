@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace CodeRun.Middleware
 {
@@ -12,6 +14,8 @@ namespace CodeRun.Middleware
     public class CustomErrorMiddleware
     {
         private readonly RequestDelegate _next;
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public CustomErrorMiddleware(RequestDelegate next)
         {
@@ -29,12 +33,12 @@ namespace CodeRun.Middleware
             catch (Exception ex)
             {
                 exceptionMsg = ex.Message;
+                Logger.Error(ex.StackTrace);
             }
             finally
             {
                 var statusCode = httpContext.Response.StatusCode;
                 bool isApi = httpContext.Request.Path.Value.StartsWith("/api/");
-
                 if (!string.IsNullOrEmpty(exceptionMsg) || statusCode != 200)
                 {
                     var msg = "";

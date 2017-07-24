@@ -17,6 +17,7 @@ using AppService;
 using Microsoft.Extensions.FileProviders;
 using CodeRun.Middleware;
 using NLog.Extensions.Logging;
+using System.IO;
 
 namespace CodeRun
 {
@@ -51,7 +52,9 @@ namespace CodeRun
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddNLog().AddDebug();
-            loggerFactory.ConfigureNLog("nlog.config");
+
+            string nlog = Path.Combine(Directory.GetCurrentDirectory(), "nlog.config");
+            loggerFactory.ConfigureNLog(nlog);
 
             if (env.IsDevelopment())
             {

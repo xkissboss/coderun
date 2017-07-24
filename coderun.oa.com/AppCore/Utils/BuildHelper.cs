@@ -33,7 +33,7 @@ namespace AppCore.Utils
 
                     //  是否有错误信息
                     bool flag = proCompiler.WaitForExit(StaticVariable.RUN_MILL);
-                    Console.WriteLine("-----------flag：" + flag.ToString() + " pid:" + proCompiler.Id);
+                    //Console.WriteLine("-----------flag：" + flag.ToString() + " pid:" + proCompiler.Id);
                     if (!flag)
                     {
                         proCompiler.Dispose();
