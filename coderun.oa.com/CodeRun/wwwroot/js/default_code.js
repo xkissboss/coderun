@@ -1,5 +1,5 @@
 ﻿var codeArr = {
-    'java': 'aW1wb3J0IGphdmEuaW8uKjsKLy8g57G75ZCNVGVzdOWSjG1haW4oKeaWueazleS4jeiDveS/ruaUue+8jOS8muWvvOiHtOS4jeiDveaJp+ihjApwdWJsaWMgY2xhc3MgVGVzdAp7CglwdWJsaWMgc3RhdGljIHZvaWQgbWFpbiAoU3RyaW5nW10gYXJncykgdGhyb3dzIGphdmEubGFuZy5FeGNlcHRpb24KCXsKCQlTeXN0ZW0ub3V0LnByaW50bG4oIkhlbGxvIFdvcmxkIik7Cgl9Cn0=',
+    'java': 'aW1wb3J0IGphdmEuaW8uKjsKCnB1YmxpYyBjbGFzcyBUZXN0CnsKCXB1YmxpYyBzdGF0aWMgdm9pZCBtYWluIChTdHJpbmdbXSBhcmdzKSB0aHJvd3MgamF2YS5sYW5nLkV4Y2VwdGlvbgoJewoJCVN5c3RlbS5vdXQucHJpbnRsbigiSGVsbG8gV29ybGQiKTsKCX0KfQ==',
     'c': 'I2luY2x1ZGUgPHN0ZGlvLmg+CgppbnQgbWFpbih2b2lkKSB7IAoJcHJpbnRmKCJ0ZXN0Iik7CglyZXR1cm4gMDsKfQ==',
     'cpp': 'I2luY2x1ZGUgPGlvc3RyZWFtPgp1c2luZyBuYW1lc3BhY2Ugc3RkOwoKaW50IG1haW4oKSB7Cgljb3V0ICA8PCAidGVzdFxuIjsKCXJldHVybiAwOwp9',
     'python': 'IyEvdXNyL2Jpbi9weXRob24KIyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KaW1wb3J0IHN5cwppZiBUcnVlIDoKCXByaW50KCdIZWxsbyBQeXRob24nKQ==',
