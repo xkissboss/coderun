@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using CodeRun.Utils;
 using AppService;
 using AppCore.Utils;
+using Microsoft.AspNetCore.Cors;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CodeRun.Api.Controllers
 {
+    [EnableCors("allowdomain")]
     [Route("api/[controller]")]
     public class CodeController : ApiBaseController
     {
@@ -21,7 +23,7 @@ namespace CodeRun.Api.Controllers
         }
 
         [HttpPost("run/{act}")]
-        public IActionResult C([FromRoute]string act, string code)
+        public async Task<IActionResult> C([FromRoute]string act, string code)
         {
             if (string.IsNullOrEmpty(act))
                 return APIReturn.BuildFail("无效的请求");
@@ -33,17 +35,17 @@ namespace CodeRun.Api.Controllers
 
             CmResult cm = null;
             if ("c".Equals(act))
-                cm = coreService.C(codeStr);
+                cm = await coreService.C(codeStr);
             else if ("cpp".Equals(act))
-                cm = coreService.CPlusPlus(codeStr);
+                cm = await coreService.CPlusPlus(codeStr);
             else if ("java".Equals(act))
-                cm = coreService.Java(codeStr);
+                cm = await coreService.Java(codeStr);
             else if ("python".Equals(act))
-                cm = coreService.Python(codeStr);
+                cm = await coreService.Python(codeStr);
             else if ("csharp".Equals(act))
-                cm = coreService.CSharp(codeStr);
+                cm = await coreService.CSharp(codeStr);
             else if ("nodejs".Equals(act))
-                cm = coreService.Nodejs(codeStr);
+                cm = await coreService.Nodejs(codeStr);
             else
                 cm = CmResult.BuildFail("", "无效的请求");
             if (cm.Success)

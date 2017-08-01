@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AppCore.Utils
 {
@@ -69,11 +71,21 @@ namespace AppCore.Utils
             scriptOptions = scriptOptions.AddImports("System.Linq");
             scriptOptions = scriptOptions.AddImports("System.Collections.Generic");
 
-            Script script = CSharpScript.Create(code, scriptOptions);
-            var endState = script.RunAsync().Result;
+            CancellationTokenSource cts = new CancellationTokenSource(StaticVariable.RUN_MILL);
 
-            //Task<ScriptState<object>> scrstate = CSharpScript.RunAsync(yourscript);
-            return endState.ReturnValue;
+            Script script = CSharpScript.Create(code, scriptOptions);
+            var task = script.RunAsync(cancellationToken : cts.Token);
+            if(!task.Wait(StaticVariable.RUN_MILL))
+            {
+                cts.Cancel();
+                return "exec long time";
+            }
+            else
+            {
+                return task.Result.ReturnValue;
+            }
+            //var endState = script.RunAsync().Result;
+            //return endState.ReturnValue;
         }
     }
 }

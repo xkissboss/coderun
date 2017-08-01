@@ -43,7 +43,14 @@ namespace CodeRun
             services.AddScoped<IBuildCommand, BuildCommand>();
             services.AddScoped<IRunCommand, RunCommand>();
             services.AddScoped<ICoreService, CoreService>();
-
+            var urls = Configuration.GetValue<string>("Cores").Split(',');
+            if (urls != null && urls.Length > 0)
+            {
+                services.AddCors(options =>
+                    options.AddPolicy("allowdomain",
+                    builder => builder.WithOrigins(urls).AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().AllowCredentials())
+                );
+            }
             services.AddMvc();
         }
 
@@ -66,7 +73,7 @@ namespace CodeRun
             }
 
             app.UseCustomErrorMiddleware();
-
+            app.UseCors("allowdomain");
             app.UseStaticFiles();
             StaticVariable.CODE_SAVE_PATH = Configuration.GetValue<string>("CodeSavePath");
             StaticVariable.RUN_MILL = Configuration.GetValue<int>("RunMill");

@@ -44,6 +44,10 @@ namespace AppCore.Run.Impl
                 object result = BuildHelper.Execute(path + "return Test.Main();");
                 if (result == null)
                     return CmResult.BuildSuccess("执行成功：没有返回值");
+                if ("exec long time".Equals(result.ToString()))
+                {
+                    return CmResult.BuildFail("执行失败", $"执行时间超过{StaticVariable.RUN_MILL}ms，代码中可能包含死循环");
+                }
                 return CmResult.BuildSuccess(string.IsNullOrEmpty(result.ToString()) ? "执行成功" : result.ToString());
             }
             catch (Exception ex)

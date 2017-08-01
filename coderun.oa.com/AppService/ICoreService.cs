@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AppService
 {
@@ -12,36 +13,36 @@ namespace AppService
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        CmResult C(string code);
+        Task<CmResult> C(string code);
         /// <summary>
         /// 执行c++语言
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        CmResult CPlusPlus(string code);
+        Task<CmResult> CPlusPlus(string code);
         /// <summary>
         /// 执行java语言
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        CmResult Java(string code);
+        Task<CmResult> Java(string code);
         /// <summary>
         /// 执行python语言
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        CmResult Python(string code);
+        Task<CmResult> Python(string code);
         /// <summary>
         /// 执行c#语言
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        CmResult CSharp(string code);
+        Task<CmResult> CSharp(string code);
         /// <summary>
         /// 执行node脚本
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        CmResult Nodejs(string code);
+        Task<CmResult> Nodejs(string code);
     }
 }
