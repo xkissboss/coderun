@@ -56,7 +56,7 @@ namespace AppService.Impl
             string path = Path.Combine(StaticVariable.NowPath, $"{Guid.NewGuid().ToString("N")}.c");
             File.WriteAllText(path, code, Encoding.UTF8);
 
-            return Task.Run(() => { return run.Python(path); });
+            return Task.Run(() => { return run.C(path); });
         }
 
         public Task<CmResult> CPlusPlus(string code)
