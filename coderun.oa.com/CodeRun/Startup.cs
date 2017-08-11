@@ -60,7 +60,7 @@ namespace CodeRun
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddNLog().AddDebug();
 
-            string nlog = Path.Combine(Directory.GetCurrentDirectory(), "nlog.config");
+            string nlog = Path.Combine(Directory.GetCurrentDirectory(), env.IsProduction() ? "nlog.Production.config" : "nlog.config");
             loggerFactory.ConfigureNLog(nlog);
 
             if (env.IsDevelopment())

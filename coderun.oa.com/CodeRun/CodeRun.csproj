@@ -37,6 +37,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Update="nlog.Production.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
